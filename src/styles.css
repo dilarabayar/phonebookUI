@@ -77,10 +77,6 @@ button{
   cursor: pointer;
 }
 
-button:hover{
-  border: 1px solid #6a5acd;
-  background: #6a5acd;
-}
 
 .list-container {
   background-color:  #e0b0ff;

@@ -1,11 +1,11 @@
 
 <div class="container">
   <div class="form-container add-contact-container">
-    <form>
+    <form #addContactForm="ngForm" (ngSubmit)="AddContact(addContactForm)">
       <h1>New Contact</h1>
-      <input type="name" placeholder="Name" />
-      <input type="phone" placeholder="Phone" />
-      <button type="button" id="add-contact-btn">Add Contact</button>
+      <input type="name" ngModel name="name" placeholder="Name" minLength="5" maxlength="20" required/>
+      <input type="number" ngModel name="phone" placeholder="Phone" minlength="10" maxlength="12" required/>
+      <button type="submit" [disabled]="addContactForm.invalid">Add Contact</button>
     </form>
   </div>
   <div class="list-container">

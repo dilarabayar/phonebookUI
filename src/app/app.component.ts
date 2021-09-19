@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Contact} from "./contact";
 import {ContactService} from "./contact.service";
 import {HttpErrorResponse} from "@angular/common/http";
-import {NgForm} from "@angular/forms";
+import {NgForm, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -18,6 +18,7 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     this.getAllContactsInfo();
+
   }
 
   public getAllContactsInfo(): void {
@@ -32,17 +33,16 @@ export class AppComponent implements OnInit{
     );
   }
 
-  public onAddContact(addForm: NgForm): void {
-    document.getElementById(`add-contact-btn`)!.click();
-    this.contactService.addContact(addForm.value).subscribe(
+  public AddContact(addContactForm: NgForm): void {
+    this.contactService.addContact(addContactForm.value).subscribe(
       (response: Contact) => {
         console.log(response);
         this.getAllContactsInfo();
-        addForm.reset();
+        addContactForm.reset();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
-        addForm.reset();
+        addContactForm.reset();
       }
     );
   }
