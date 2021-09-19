@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Contact} from "./contact";
 import {ContactService} from "./contact.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -27,6 +28,21 @@ export class AppComponent implements OnInit{
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
+      }
+    );
+  }
+
+  public onAddContact(addForm: NgForm): void {
+    document.getElementById(`add-contact-btn`)!.click();
+    this.contactService.addContact(addForm.value).subscribe(
+      (response: Contact) => {
+        console.log(response);
+        this.getAllContactsInfo();
+        addForm.reset();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+        addForm.reset();
       }
     );
   }
